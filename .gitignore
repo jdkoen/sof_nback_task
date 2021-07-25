@@ -1,3 +1,8 @@
+# Ignore stimulus image databases
+images/
+prac_images/
+stim_lists/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,3 +132,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Other
+settings.json
+.DS_Store
