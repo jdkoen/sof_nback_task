@@ -5,6 +5,7 @@ stim_lists/
 *.zip
 data/
 archive/
+*lastrun.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
