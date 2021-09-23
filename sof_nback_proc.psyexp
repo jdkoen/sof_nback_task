@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2021.2.3">
+<PsychoPy2experiment encoding="utf-8" version="2021.2.1">
   <Settings>
     <Param name="Audio latency priority" updates="None" val="use prefs" valType="str"/>
     <Param name="Audio lib" updates="None" val="use prefs" valType="str"/>
@@ -7,7 +7,7 @@
     <Param name="Data file delimiter" updates="None" val="auto" valType="str"/>
     <Param name="Data filename" updates="None" val="u'archive/%s_%s_%s' % (expInfo['id'], expName, expInfo['date'])" valType="code"/>
     <Param name="Enable Escape" updates="None" val="True" valType="bool"/>
-    <Param name="Experiment info" updates="None" val="{'id': '', 'experimenter': '', 'stim_set': '', 'task': &quot;['1back', '2back']&quot;, 'phase': &quot;['prac', 'real']&quot;, 'eeg_record': &quot;['yes', 'no']&quot;, 'show_control_monitor': &quot;['yes', 'no']&quot;}" valType="code"/>
+    <Param name="Experiment info" updates="None" val="{'id': '', 'experimenter': '', 'stim_set': '', 'task': &quot;['1back', '2back']&quot;, 'phase': &quot;['prac', 'real']&quot;, 'eeg_record': &quot;['yes', 'no']&quot;, 'show_control_monitor': &quot;['no']&quot;}" valType="code"/>
     <Param name="Force stereo" updates="None" val="True" valType="bool"/>
     <Param name="Full-screen window" updates="None" val="True" valType="bool"/>
     <Param name="HTML path" updates="None" val="html" valType="str"/>
@@ -26,7 +26,7 @@
     <Param name="Show mouse" updates="None" val="False" valType="bool"/>
     <Param name="Units" updates="None" val="deg" valType="str"/>
     <Param name="Use version" updates="None" val="" valType="str"/>
-    <Param name="Window size (pixels)" updates="None" val="[1440, 900]" valType="code"/>
+    <Param name="Window size (pixels)" updates="None" val="[1920, 1080]" valType="code"/>
     <Param name="blendMode" updates="None" val="avg" valType="str"/>
     <Param name="color" updates="None" val="$[0.0,0.0,0.0]" valType="str"/>
     <Param name="colorSpace" updates="None" val="rgb" valType="str"/>
@@ -275,7 +275,7 @@
         <Param name="durationEstim" updates="None" val="" valType="num"/>
         <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
-        <Param name="image" updates="constant" val="$instruction_image_file" valType="file"/>
+        <Param name="image" updates="constant" val="$this_instruction_img " valType="file"/>
         <Param name="interpolate" updates="constant" val="linear" valType="str"/>
         <Param name="mask" updates="constant" val="" valType="str"/>
         <Param name="name" updates="None" val="instruction_image" valType="code"/>
@@ -612,10 +612,10 @@
       <CodeComponent name="select_stim_list_code">
         <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="# Defirn the stim_dir before the routine&amp;#10;stim_dir = Path('stim_lists')&amp;#10;stim_dir.mkdir(exist_ok=True, parents=True)&amp;#10;&amp;#10;# Define the file names for the critical set&amp;#10;back1_file = stim_dir / f&quot;set-{int(expInfo['stim_set'])}_task-1back.csv&quot;&amp;#10;back2_file = stim_dir / f&quot;set-{int(expInfo['stim_set'])}_task-2back.csv&quot;&amp;#10;&amp;#10;# Select the appropriate files based on task&amp;#10;if expInfo['task'] == '1back':&amp;#10;    if expInfo['phase'] == 'real':&amp;#10;        this_instruction_img = '1back_real_instr.jpeg'&amp;#10;        this_stim_file = str(back1_file)&amp;#10;    else:&amp;#10;        this_instruction_img = '1back_prac_instr.jpeg'&amp;#10;        this_stim_file = 'prac_1back.csv'&amp;#10;else:&amp;#10;    if expInfo['phase'] == 'real':&amp;#10;        this_instruction_img = '2back_real_instr.jpeg'&amp;#10;        this_stim_file = str(back2_file)&amp;#10;    else:&amp;#10;        this_instruction_img = '2back_prac_instr.jpeg'&amp;#10;        this_stim_file = 'prac_2back.csv'&amp;#10;        &amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="/* Syntax Error: Fix Python code */" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Routine" updates="constant" val="# Define the file names for the critical set&amp;#10;back1_file = stim_dir / f&quot;sub-{int(expInfo['stim_list']):03}_task-1back_crit.csv&quot;&amp;#10;back2_file = stim_dir / f&quot;sub-{int(expInfo['stim_list']):03}_task-2back_crit.csv&quot;&amp;#10;&amp;#10;# Select the appropriate files based on task&amp;#10;if expInfo['task'] == '1back':&amp;#10;    if expInfo['phase'] == 'real':&amp;#10;        this_instruction_img = '1back_real_instr.jpeg'&amp;#10;        this_stim_file = str(back1_file)&amp;#10;    else:&amp;#10;        this_instruction_img = '1back_prac_instr.jpeg'&amp;#10;        this_stim_file = 'prac_1back.csv'&amp;#10;else:&amp;#10;    if expInfo['phase'] == 'real':&amp;#10;        this_instruction_img = '2back_real_instr.jpeg'&amp;#10;        this_stim_file = str(back2_file)&amp;#10;    else:&amp;#10;        this_instruction_img = '2back_prac_instr.jpeg'&amp;#10;        this_stim_file = 'prac_2back.csv'&amp;#10;        &amp;#10;        &amp;#10;b&amp;#10;" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Py" valType="str"/>
         <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
