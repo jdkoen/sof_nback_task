@@ -7,7 +7,7 @@
     <Param name="Data file delimiter" updates="None" val="auto" valType="str"/>
     <Param name="Data filename" updates="None" val="u'archive/%s_%s_%s' % (expInfo['id'], expName, expInfo['date'])" valType="code"/>
     <Param name="Enable Escape" updates="None" val="True" valType="bool"/>
-    <Param name="Experiment info" updates="None" val="{'id': '', 'experimenter': '', 'stim_set': '', 'task': &quot;['1back', '2back']&quot;, 'phase': &quot;['prac', 'real']&quot;, 'eeg_record': &quot;['yes', 'no']&quot;, 'show_control_monitor': &quot;['no']&quot;}" valType="code"/>
+    <Param name="Experiment info" updates="None" val="{'id': '', 'experimenter': '', 'stim_list': '', 'task': &quot;['1back', '2back']&quot;, 'phase': &quot;['prac', 'real']&quot;, 'eeg_record': &quot;['yes', 'no']&quot;, 'show_control_monitor': &quot;['no']&quot;}" valType="code"/>
     <Param name="Force stereo" updates="None" val="True" valType="bool"/>
     <Param name="Full-screen window" updates="None" val="True" valType="bool"/>
     <Param name="HTML path" updates="None" val="html" valType="str"/>
@@ -195,12 +195,12 @@
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Routine" updates="constant" val="# State I have not sent a response trigger yet, and initialize response.keys&amp;#10;resp_trigger_sent = False&amp;#10;resp_marker_frame = 0&amp;#10;&amp;#10;# Response markers are outlined in the config routine." valType="extendedCode"/>
         <Param name="Code Type" updates="None" val="Py" valType="str"/>
-        <Param name="Each Frame" updates="constant" val="# Send response trigger&amp;#10;if eeg_record:&amp;#10;    if len(response.keys) == 1:&amp;#10;        &amp;#10;        # Code the response&amp;#10;        this_key = response.keys&amp;#10;        this_rt  = response.rt&amp;#10;        if presentation == 2:&amp;#10;            is_resp_cor = 1&amp;#10;            resp_type = 'correct'&amp;#10;        else:&amp;#10;            is_resp_cor = 0&amp;#10;            resp_type = 'incorrect'&amp;#10;        &amp;#10;        # Send the marker&amp;#10;        if not resp_trigger_sent and expInfo['phase'] == 'real':&amp;#10;            # Make call to send trigger&amp;#10;            win.callOnFlip(eeg_trig_box.write, resp_marker[resp_type])&amp;#10;            resp_trigger_sent = True &amp;#10;            resp_marker_frame = frameN&amp;#10;            trials.addData(u'resp_trigger_frame', resp_marker_frame)&amp;#10;            &amp;#10;    # Reset the trigger at the next flip&amp;#10;    if resp_trigger_sent and frameN == resp_marker_frame + 5:&amp;#10;        win.callOnFlip(eeg_trig_box.write, reset_bit)" valType="extendedCode"/>
+        <Param name="Each Frame" updates="constant" val="# Get the response&amp;#10;if len(response.keys) == 1:&amp;#10;    # Code the response&amp;#10;    this_key = response.keys&amp;#10;    this_rt  = response.rt&amp;#10;    if presentation == 2:&amp;#10;        is_resp_cor = 1&amp;#10;        resp_type = 'correct'&amp;#10;    else:&amp;#10;        is_resp_cor = 0&amp;#10;        resp_type = 'incorrect'&amp;#10;        &amp;#10;# Send response trigger&amp;#10;if eeg_record:&amp;#10;    &amp;#10;    # Send the marker&amp;#10;    if not resp_trigger_sent and expInfo['phase'] == 'real':&amp;#10;        # Make call to send trigger&amp;#10;        win.callOnFlip(eeg_trig_box.write, resp_marker[resp_type])&amp;#10;        resp_trigger_sent = True &amp;#10;        resp_marker_frame = frameN&amp;#10;        trials.addData(u'resp_trigger_frame', resp_marker_frame)&amp;#10;            &amp;#10;    # Reset the trigger at the next flip&amp;#10;    if resp_trigger_sent and frameN == resp_marker_frame + 5:&amp;#10;        win.callOnFlip(eeg_trig_box.write, reset_bit)" valType="extendedCode"/>
         <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
         <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="End JS Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="End JS Routine" updates="constant" val="" valType="extendedCode"/>
-        <Param name="End Routine" updates="constant" val="# Log and store data&amp;#10;if not response.keys: # Update things I need to&amp;#10;    this_key = 'n/a'&amp;#10;    this_rt = -99&amp;#10;    resp_trigger_frame = -99&amp;#10;    if presentation == 1:&amp;#10;        is_resp_cor = 1&amp;#10;    else:&amp;#10;        is_resp_cor = 0&amp;#10;&amp;#10;# Add data to trialHandler&amp;#10;trials.addData(u'resp', this_key)&amp;#10;trials.addData(u'rt', this_rt)&amp;#10;trials.addData(u'correct', is_resp_cor)&amp;#10;if eeg_record:&amp;#10;    trials.addData(u'stim_trigger_frame', stim_trigger_frame)&amp;#10;    trials.addData(u'resp_trigger_frame', resp_trigger_frame)" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="# Log and store data&amp;#10;if not response.keys: # Update things I need to&amp;#10;    this_key = 'n/a'&amp;#10;    this_rt = -99&amp;#10;    resp_trigger_frame = -99&amp;#10;    if presentation == 1:&amp;#10;        is_resp_cor = 1&amp;#10;    else:&amp;#10;        is_resp_cor = 0&amp;#10;&amp;#10;# Add data to trialHandler&amp;#10;trials.addData(u'resp', this_key)&amp;#10;trials.addData(u'rt', this_rt)&amp;#10;trials.addData(u'correct', is_resp_cor)&amp;#10;" valType="extendedCode"/>
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="name" updates="None" val="send_resp_trigger_and_code" valType="code"/>
       </CodeComponent>
@@ -612,7 +612,7 @@
       <CodeComponent name="select_stim_list_code">
         <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
         <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
-        <Param name="Begin Experiment" updates="constant" val="# Defirn the stim_dir before the routine&amp;#10;stim_dir = Path('stim_lists')&amp;#10;stim_dir.mkdir(exist_ok=True, parents=True)&amp;#10;&amp;#10;# Define the file names for the critical set&amp;#10;back1_file = stim_dir / f&quot;set-{int(expInfo['stim_set'])}_task-1back.csv&quot;&amp;#10;back2_file = stim_dir / f&quot;set-{int(expInfo['stim_set'])}_task-2back.csv&quot;&amp;#10;&amp;#10;# Select the appropriate files based on task&amp;#10;if expInfo['task'] == '1back':&amp;#10;    if expInfo['phase'] == 'real':&amp;#10;        this_instruction_img = '1back_real_instr.jpeg'&amp;#10;        this_stim_file = str(back1_file)&amp;#10;    else:&amp;#10;        this_instruction_img = '1back_prac_instr.jpeg'&amp;#10;        this_stim_file = 'prac_1back.csv'&amp;#10;else:&amp;#10;    if expInfo['phase'] == 'real':&amp;#10;        this_instruction_img = '2back_real_instr.jpeg'&amp;#10;        this_stim_file = str(back2_file)&amp;#10;    else:&amp;#10;        this_instruction_img = '2back_prac_instr.jpeg'&amp;#10;        this_stim_file = 'prac_2back.csv'&amp;#10;        &amp;#10;" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="# Defirn the stim_dir before the routine&amp;#10;stim_dir = Path('stim_lists')&amp;#10;&amp;#10;# Define the file names for the critical set&amp;#10;back1_file = stim_dir / f&quot;set-{int(expInfo['stim_list']:03)}_task-1back.csv&quot;&amp;#10;back2_file = stim_dir / f&quot;set-{int(expInfo['stim_list']:03)}_task-2back.csv&quot;&amp;#10;&amp;#10;# Select the appropriate files based on task&amp;#10;if expInfo['task'] == '1back':&amp;#10;    if expInfo['phase'] == 'real':&amp;#10;        this_instruction_img = '1back_real_instr.jpeg'&amp;#10;        this_stim_file = str(back1_file)&amp;#10;    else:&amp;#10;        this_instruction_img = '1back_prac_instr.jpeg'&amp;#10;        this_stim_file = 'prac_1back.csv'&amp;#10;else:&amp;#10;    if expInfo['phase'] == 'real':&amp;#10;        this_instruction_img = '2back_real_instr.jpeg'&amp;#10;        this_stim_file = str(back2_file)&amp;#10;    else:&amp;#10;        this_instruction_img = '2back_prac_instr.jpeg'&amp;#10;        this_stim_file = 'prac_2back.csv'&amp;#10;        &amp;#10;" valType="extendedCode"/>
         <Param name="Begin JS Experiment" updates="constant" val="/* Syntax Error: Fix Python code */" valType="extendedCode"/>
         <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
         <Param name="Begin Routine" updates="constant" val="" valType="extendedCode"/>
@@ -626,6 +626,75 @@
         <Param name="disabled" updates="None" val="False" valType="bool"/>
         <Param name="name" updates="None" val="select_stim_list_code" valType="code"/>
       </CodeComponent>
+    </Routine>
+    <Routine name="feedback">
+      <CodeComponent name="show_feedback">
+        <Param name="Before Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Before JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin JS Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Begin Routine" updates="constant" val="if this_phase == 'real' or is_resp_cor:&amp;#10;    continueRoutine=False&amp;#10;&amp;#10;feedback_text1 = 'CORRECT' if is_resp_cor == 1 else 'INCORRECT'&amp;#10;if is_resp_cor == 1:&amp;#10;    feedback_text2 = ''&amp;#10;elif task == '1back':&amp;#10;    feedback_text2 = 'Press the button when you an image that has been immediately repeated'&amp;#10;else:&amp;#10;    feedback_text2 = 'Press the button when you an image that repeated 2 trials ago'&amp;#10;" valType="extendedCode"/>
+        <Param name="Code Type" updates="None" val="Py" valType="str"/>
+        <Param name="Each Frame" updates="constant" val="" valType="extendedCode"/>
+        <Param name="Each JS Frame" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End JS Experiment" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End JS Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="End Routine" updates="constant" val="" valType="extendedCode"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="name" updates="None" val="show_feedback" valType="code"/>
+      </CodeComponent>
+      <TextComponent name="feedback1">
+        <Param name="color" updates="constant" val="white" valType="color"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="flip" updates="constant" val="None" valType="str"/>
+        <Param name="font" updates="constant" val="Open Sans" valType="str"/>
+        <Param name="languageStyle" updates="None" val="LTR" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="1" valType="num"/>
+        <Param name="name" updates="None" val="feedback1" valType="code"/>
+        <Param name="opacity" updates="constant" val="" valType="num"/>
+        <Param name="ori" updates="constant" val="0" valType="num"/>
+        <Param name="pos" updates="constant" val="(0, 0)" valType="list"/>
+        <Param name="saveStartStop" updates="None" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="1.5" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
+        <Param name="text" updates="set every repeat" val="$feedback_text1" valType="str"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="wrapWidth" updates="constant" val="" valType="num"/>
+      </TextComponent>
+      <TextComponent name="feedback2">
+        <Param name="color" updates="constant" val="white" valType="color"/>
+        <Param name="colorSpace" updates="constant" val="rgb" valType="str"/>
+        <Param name="contrast" updates="constant" val="1" valType="num"/>
+        <Param name="disabled" updates="None" val="False" valType="bool"/>
+        <Param name="durationEstim" updates="None" val="" valType="code"/>
+        <Param name="flip" updates="constant" val="None" valType="str"/>
+        <Param name="font" updates="constant" val="Open Sans" valType="str"/>
+        <Param name="languageStyle" updates="None" val="LTR" valType="str"/>
+        <Param name="letterHeight" updates="constant" val="1" valType="num"/>
+        <Param name="name" updates="None" val="feedback2" valType="code"/>
+        <Param name="opacity" updates="constant" val="" valType="num"/>
+        <Param name="ori" updates="constant" val="0" valType="num"/>
+        <Param name="pos" updates="constant" val="(0, -2)" valType="list"/>
+        <Param name="saveStartStop" updates="None" val="True" valType="bool"/>
+        <Param name="startEstim" updates="None" val="" valType="code"/>
+        <Param name="startType" updates="None" val="time (s)" valType="str"/>
+        <Param name="startVal" updates="None" val="0.0" valType="code"/>
+        <Param name="stopType" updates="None" val="duration (s)" valType="str"/>
+        <Param name="stopVal" updates="constant" val="1.5" valType="code"/>
+        <Param name="syncScreenRefresh" updates="None" val="True" valType="bool"/>
+        <Param name="text" updates="set every repeat" val="$feedback_text2" valType="str"/>
+        <Param name="units" updates="None" val="from exp settings" valType="str"/>
+        <Param name="wrapWidth" updates="constant" val="60" valType="num"/>
+      </TextComponent>
     </Routine>
   </Routines>
   <Flow>
@@ -646,6 +715,7 @@
     <Routine name="task_break"/>
     <Routine name="delay"/>
     <Routine name="trial"/>
+    <Routine name="feedback"/>
     <LoopTerminator name="trials"/>
     <Routine name="save_trials"/>
     <Routine name="task_complete"/>
