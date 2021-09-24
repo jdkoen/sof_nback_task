@@ -98,7 +98,7 @@
         <Param name="durationEstim" updates="None" val=".5" valType="num"/>
         <Param name="flipHoriz" updates="constant" val="False" valType="bool"/>
         <Param name="flipVert" updates="constant" val="False" valType="bool"/>
-        <Param name="image" updates="set every repeat" val="os.path.join('images', $image)" valType="file"/>
+        <Param name="image" updates="set every repeat" val="$os.path.join('images', image)" valType="file"/>
         <Param name="interpolate" updates="constant" val="linear" valType="str"/>
         <Param name="mask" updates="constant" val="" valType="str"/>
         <Param name="name" updates="None" val="stim_image" valType="code"/>
